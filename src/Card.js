@@ -11,6 +11,7 @@ class Card extends Component {
             <div className="Card">
                 <h1>{this.props.number}</h1>
                 <img src={this.suitsConvert(this.props.suit)} alt={this.props.suit} />
+                <p>{this.props.playedBy === undefined ? "" : this.props.playedBy}</p>
             </div>
         )
     }

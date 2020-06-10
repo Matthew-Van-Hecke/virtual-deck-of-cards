@@ -1,5 +1,5 @@
 import React from 'react';
-import Deck from './Deck';
+import Game from './Game';
 import './App.css';
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <p>{alskdjf}</p>
-      <Deck />
+      <Game />
     </div>
   );
 }

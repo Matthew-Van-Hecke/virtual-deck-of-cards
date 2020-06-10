@@ -1,8 +1,10 @@
 .Card{
     background-color: #bbbbbb;
-    width: 120px;
-    height: 180px;
+    width: 150px;
     border-radius: 15px;
+    display: inline-block;
+    padding: 5px;
+    margin: 10px;
 }
 .Card img{
     width: 80%;
