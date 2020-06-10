@@ -1,0 +1,9 @@
+.Card{
+    background-color: #bbbbbb;
+    width: 120px;
+    height: 180px;
+    border-radius: 15px;
+}
+.Card img{
+    width: 80%;
+}
