@@ -1,11 +1,13 @@
 import React from 'react';
-import Card from './Card';
+import Deck from './Deck';
 import './App.css';
 
 function App() {
+  let alskdjf = [];
   return (
     <div className="App">
-      <Card suit="hearts" number={3} />
+      <p>{alskdjf}</p>
+      <Deck />
     </div>
   );
 }
