@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import JoinGameForm from './JoinGameForm';
 import Card from './Card';
 import './Game.css';
 
@@ -8,20 +9,22 @@ class Deck extends Component{
     }
     constructor(props){
         super(props);
-        this.state = {hands: [[...this.props.deck]], handNumber: 0};
+        this.state = {hands: [{name: "Main Deck", hand: [...this.props.deck]}], handNumber: 0};
         this.selectRandomCard = this.selectRandomCard.bind(this);
         this.dealCards = this.dealCards.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.addPlayer = this.addPlayer.bind(this);
     }
     dealCards(numberOfHands, numberOfCardsToDeal){
-        let hands = [];
+        let hands = [...this.state.hands];
         let deck = [...this.props.deck];
-        for(let i = 0; i < numberOfHands; i++){
-            hands.push([]);
-        }
+        // for(let i = 1; i < numberOfHands; i++){
+        //     hands.push([]);
+        // }
         for(let i = 0; i < numberOfCardsToDeal; i++){
-            hands[i % numberOfHands].push(...this.selectRandomCard(deck));
+            hands[i % numberOfHands].hand.push(...this.selectRandomCard(deck));
         }
+        hands[0].hand = deck;
         this.setState({hands, deck});
     }
     selectRandomCard(deck){
@@ -33,21 +36,33 @@ class Deck extends Component{
         evt.preventDefault();
         this.setState({[evt.target.name]: evt.target.value});
     }
+    addPlayer(info){
+        let newPlayer = {name: info.playerName, hand: []};
+        let hands = [...this.state.hands, newPlayer];
+        this.setState({hands});
+    }
     render(){
         let hands = [this.state.deck, ...this.state.hands];
         console.log(this.state.handNumber);
         let display = this.state.handNumber >= this.state.hands.length || this.state.handNumber === "" ? 
                         <p>No Cards To Display</p> :
-                        this.state.hands[this.state.handNumber].map(c => <Card suit={c.split("-")[1]} number={c.split("-")[0]} key={c} playedBy={"Hand Number: " + this.state.handNumber} />)
+                        this.state.hands[this.state.handNumber].hand.map(c => 
+                            <Card 
+                                suit={c.split("-")[1]} 
+                                number={c.split("-")[0]} 
+                                key={c} 
+                                playedBy={this.state.hands[this.state.handNumber].name}
+                            />)
         return(
             <div className="Game">
+                <JoinGameForm addPlayer={this.addPlayer} />
                 <input 
                     id="handNumber"
                     name="handNumber"
                     value={this.state.handNumber}
                     onChange={this.handleChange}
                 />
-                <button onClick={() => this.dealCards(5, 50)}>Deal Hand</button>
+                <button onClick={() => this.dealCards(this.state.hands.length, 50)} disabled={this.state.hands.length < 2}>Deal Hand</button>
                 <button onClick={() => this.selectRandomCard()}>Get Card</button>
                 {display}
             </div>
