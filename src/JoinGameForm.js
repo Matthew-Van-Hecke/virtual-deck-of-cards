@@ -34,7 +34,7 @@ class EntryPoint extends Component{
                 name="playerName"
                 id="playerName"
                 onChange={this.handleChange}
-                value={this.state.playerNumber}
+                value={this.state.playerName}
             />
             <button>Join</button>
         </form>

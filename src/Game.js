@@ -46,7 +46,7 @@ class Deck extends Component{
         console.log(this.state.handNumber);
         let display = this.state.handNumber >= this.state.hands.length || this.state.handNumber === "" ? 
                         <p>No Cards To Display</p> :
-                        this.state.hands[this.state.handNumber].hand.map(c => 
+                        this.state.hands[this.state.handNumber].hand.sort((a,b) => this.props.deck.indexOf(a)-this.props.deck.indexOf(b)).map(c => 
                             <Card 
                                 suit={c.split("-")[1]} 
                                 number={c.split("-")[0]} 
